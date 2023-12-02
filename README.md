@@ -28,9 +28,15 @@ In this final project, you will implement the missing parts in the schematic. To
   * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
   * Windows: recommend using [MinGW](http://www.mingw.org/)
 
+
 ## Basic Build Instructions
 
 1. Clone this repo.
-2. Make a build directory in the top level project directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
-4. Run it: `./3D_object_tracking`.
+2. Build Docker container `docker build . -t object_tracking`
+3. Allow local connections to your X server `xhost +local:`
+4. Run the docker container and forward display `docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd):/app object_tracking`
+5. (From the container) Make a build directory in the top level directory: `mkdir build && cd build`
+6. (From the container) Compile: `cmake .. && make`
+7. (From the container) Run it: `./3D_object_tracking`.
+
+
